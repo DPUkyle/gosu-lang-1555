@@ -21,18 +21,84 @@
       <version>1.14.7</version>
       <scope>runtime</scope>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>io.cucumber</groupId>-->
-      <!--<artifactId>cucumber-gosu</artifactId>-->
-      <!--<version>2.0.1</version>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>io.cucumber</groupId>-->
-      <!--<artifactId>cucumber-junit</artifactId>-->
-      <!--<version>2.0.1</version>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-gosu</artifactId>
+      <version>2.0.2-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>2.0.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
+  <build>
+    <!-- The following ensures src/main/gosu and src/test/gosu are marked as source roots -->
+    <!-- This is for convenience in IJ -->
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/gosu</source> <!-- mark as "blue" source root in IJ -->
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-resource</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>add-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src/main/gosu</directory> <!-- ensure Gosu sources are copied to target -->
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-test-source</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/test/gosu</source> <!-- mark as "green" test source root in IJ -->
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-test-resource</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src/test/gosu</directory> <!-- ensure Gosu test sources are copied to target -->
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

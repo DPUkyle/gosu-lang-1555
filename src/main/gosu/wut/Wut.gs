@@ -1,8 +1,8 @@
 package wut
 
-/**
- * Created by kmoore on 2018-03-09.
- */
 class Wut {
 
+  construct() {
+    print("made a Wut")
+  }
 }
